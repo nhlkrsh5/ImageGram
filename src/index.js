@@ -24,7 +24,7 @@ app.get("/",upload.none(),isAuthenticated,(req,res)=>{
     return res.send("Home page");
 });
 
-app.get("/ping",isAuthenticated,(req,res)=>{
+app.get("/ping",(req,res)=>{
 
     console.log("ping User:",req.user);
     return res.json({messege: "Pong"});
