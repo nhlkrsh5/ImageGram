@@ -5,6 +5,7 @@ import { multerUpload } from "./config/multerConfig.js";
 import apiRouter from "./routers/apiRouter.js"
 import { isAuthenticated } from "./middleware/AuthMiddleware.js";
 import multer from "multer";
+import cors from "cors";
 import { swaggerSpace,swagger_ui} from "./APIdocs/swagger.js";
 
 dotenv.config();
@@ -15,7 +16,11 @@ app.use(express.text());
 app.use(express.urlencoded({extended: true}));
 const PORT = 3000;
 //console.log(process.env.DB_URL);
-
+app.use(cors({
+  origin: '*', // or '*' for development
+  methods: ['GET', 'POST', 'PUT', 'DELETE'],
+  allowedHeaders: ['Content-Type']
+}));
 app.use("/api",apiRouter);
 
 app.use("/api-docs", swagger_ui.serve, swagger_ui.setup(swaggerSpace));
