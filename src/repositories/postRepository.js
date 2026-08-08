@@ -17,7 +17,7 @@ export const createNewPost = async (caption, image, user) => {
 
 export const findOnepost = async (id) => {
     try {
-        let post = await Post.findById(id);
+        let post = await Post.findById(id).populate("user", "username email");;
         return post;
     } catch (error) {
         console.log(error);

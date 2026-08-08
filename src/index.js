@@ -19,7 +19,8 @@ const PORT = 3000;
 app.use(cors({
   origin: '*', // or '*' for development
   methods: ['GET', 'POST', 'PUT', 'DELETE'],
-  allowedHeaders: ['Content-Type']
+  allowedHeaders: ['Content-Type','x-access-tocken','Authorization'],
+  credentials: true
 }));
 app.use("/api",apiRouter);
 
