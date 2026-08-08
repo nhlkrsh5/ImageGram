@@ -3,9 +3,18 @@ import { getAllUsers, userSignup, UserVerify } from "../service/UserService.js";
 import bcrypt from "bcrypt";
 
 export const getProfile = (req,res)=>{
-    res.json({
-        message: "Not implemented"
-    });
+
+    if(req.user){
+        res.json({
+            message: "User found...",
+            data: req.user
+        });
+    }else{
+        res.json({
+            message: "User not found...",
+        });
+    }
+   
 }
 
 export const userRegistration = async(req,res)=>{
