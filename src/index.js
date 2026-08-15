@@ -7,6 +7,7 @@ import { isAuthenticated } from "./middleware/AuthMiddleware.js";
 import multer from "multer";
 import cors from "cors";
 import { swaggerSpace,swagger_ui} from "./APIdocs/swagger.js";
+import { rateLimit } from 'express-rate-limit'
 
 dotenv.config();
 
@@ -22,6 +23,13 @@ app.use(cors({
   allowedHeaders: ['Content-Type','x-access-tocken','Authorization'],
   credentials: true
 }));
+
+const limiter = rateLimit({
+	windowMs: 0.5 * 60 * 1000, // 30 second
+	limit: 5, // Limit each IP to 100 requests per `window` (here, per 15 minutes).
+});
+
+app.use(limiter);
 app.use("/api",apiRouter);
 
 app.use("/api-docs", swagger_ui.serve, swagger_ui.setup(swaggerSpace));

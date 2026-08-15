@@ -1,3 +1,4 @@
+import { GetUserPost } from "../repositories/postRepository.js";
 import { createUser, findAllUser, findUserByEmail } from "../repositories/userRepository.js";
 import {generateTocken} from "../utils/jwt.js"
 import bcrypt from "bcrypt";
@@ -76,5 +77,14 @@ export const userExist = async (email) => {
     } catch (error) {
         console.log("Something went wrong!");
         
+    }
+}
+
+export const findUserSpost = async (id) => {
+    try {
+        const resposns = await GetUserPost(id);
+        return resposns;
+    } catch (error) {
+        console.log("Something went wrong!",error);   
     }
 }

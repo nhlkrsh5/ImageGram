@@ -116,6 +116,15 @@ export const IsUserLikesOnPost = async (postId, commentId) => {
         throw error;
     }
 }
+
+export const GetUserPost = async (userId) => {
+    try {
+        const posts = await Post.find({user: userId }).populate("user");
+        return posts;
+    } catch (error) {
+        throw error;
+    }
+}
 /*
 export const deletePost = (id)=>{
     try {

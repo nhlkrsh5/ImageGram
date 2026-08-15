@@ -1,5 +1,5 @@
 
-import { getAllUsers, userSignup, UserVerify } from "../service/UserService.js";
+import { findUserSpost, getAllUsers, userSignup, UserVerify } from "../service/UserService.js";
 import bcrypt from "bcrypt";
 
 export const getProfile = (req,res)=>{
@@ -90,5 +90,20 @@ export const AllUsers = async (req,res) => {
         console.log("Something went wrong!"+error);
         
         
+    }
+}
+
+export const GetAllotsOfUser = async (req,res) => {
+
+    const user = req.user.id;
+    try {
+        const data = await findUserSpost(user);
+        res.json({
+            success: true,
+            messege: "Found",
+            data: data
+        })
+    } catch (error) {
+        console.log("Something went wrong!"+error);
     }
 }
