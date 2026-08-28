@@ -1,5 +1,4 @@
-
-import { findUserSpost, getAllUsers, userSignup, UserVerify } from "../service/UserService.js";
+import { BanUserPost, findUserSpost, getAllUsers, UserDelete, userSignup, UserVerify } from "../service/UserService.js";
 import bcrypt from "bcrypt";
 
 export const getProfile = (req,res)=>{
@@ -87,9 +86,7 @@ export const AllUsers = async (req,res) => {
             data: users
         });
     } catch (error) {
-        console.log("Something went wrong!"+error);
-        
-        
+        console.log("Something went wrong!"+error); 
     }
 }
 
@@ -103,6 +100,55 @@ export const GetAllotsOfUser = async (req,res) => {
             messege: "Found",
             data: data
         })
+    } catch (error) {
+        console.log("Something went wrong!"+error);
+    }
+}
+
+export const DeleteUser = async(req,res)=>{
+    try {
+        const id = req.params.id;
+
+        const user = await UserDelete(id);
+
+        if (user) {
+            res.json({
+                success: true,
+                messege: "User deleted",
+                data: user
+            });
+        }else{
+            res.json({
+                success: true,
+                messege: "User Not found",
+                data: null
+            });
+        }
+       
+    } catch (error) {
+        console.log("Something went wrong!"+error);
+    }
+}
+
+export const BanAPost = async(req,res)=>{
+    try {
+        const id = req.params.id;
+        const post = await BanUserPost(id);
+
+         if (post) {
+            res.json({
+                success: true,
+                messege: "Post Banned",
+                data: post
+            });
+        }else{
+            res.json({
+                success: true,
+                messege: "Post Not found",
+                data: null
+            });
+        }
+
     } catch (error) {
         console.log("Something went wrong!"+error);
     }

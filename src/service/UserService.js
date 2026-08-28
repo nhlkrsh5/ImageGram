@@ -1,5 +1,5 @@
 import { GetUserPost } from "../repositories/postRepository.js";
-import { createUser, findAllUser, findUserByEmail } from "../repositories/userRepository.js";
+import { BanAUserByID, createUser, DeleteSpecificUser, findAllUser, findUserByEmail } from "../repositories/userRepository.js";
 import {generateTocken} from "../utils/jwt.js"
 import bcrypt from "bcrypt";
 
@@ -86,5 +86,23 @@ export const findUserSpost = async (id) => {
         return resposns;
     } catch (error) {
         console.log("Something went wrong!",error);   
+    }
+}
+
+export const UserDelete = async (id) => {
+    try {
+        const response = await DeleteSpecificUser(id);
+        return response;
+    } catch (error) {
+        console.log("Something went wrong!",error);  
+    }
+}
+
+export const BanUserPost = async(id)=>{
+    try {
+        const response = await BanAUserByID(id);
+        return response;
+    } catch (error) {
+        console.log("Something went wrong!",error); 
     }
 }

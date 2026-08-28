@@ -1,5 +1,6 @@
 //import user from "../schema/user.js";
 import User from "../schema/user.js";
+import post from "../schema/post.js";
 
 
 export const createUser = async(userObj)=>{
@@ -31,5 +32,32 @@ export const findAllUser = async()=>{
         return data;
     } catch (error) {
          console.log("Error:",error);
+    }
+}
+
+export const DeleteSpecificUser = async (id) => {
+    try {
+        const data = await User.findByIdAndDelete(id);
+        return data;
+    } catch (error) {
+        throw error;
+    }
+}
+
+export const BanAUserByID = async (id) => {
+    try {
+        const data = await post.findByIdAndUpdate(
+            id,
+            {
+                $set:{
+                    caption: "Post Ban for upload sensitive content",
+                    image: "https://firs-project-bucket-644.s3.eu-north-1.amazonaws.com/c_content.jpg"
+                }
+            },
+            {new: true}
+        );
+        return data;
+    } catch (error) {
+        throw error;
     }
 }

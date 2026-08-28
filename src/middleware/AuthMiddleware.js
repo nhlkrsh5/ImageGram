@@ -44,7 +44,8 @@ export const isAdmin = (req,res,next)=>{
         res.status(401).json({
             success: false,
             messeage: "Only admin can update a post"
-        })
+        });
+    }else{
+        next();
     }
-    next();
 }
