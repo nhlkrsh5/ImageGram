@@ -1,4 +1,4 @@
-import { BanUserPost, findUserSpost, getAllUsers, UserDelete, userSignup, UserVerify } from "../service/UserService.js";
+import { BanAUserProfile, BanUserPost, findUserSpost, getAllUsers, UserDelete, userSignup, UserVerify } from "../service/UserService.js";
 import bcrypt from "bcrypt";
 
 export const getProfile = (req,res)=>{
@@ -151,5 +151,32 @@ export const BanAPost = async(req,res)=>{
 
     } catch (error) {
         console.log("Something went wrong!"+error);
+    }
+}
+
+export const BanAUser = async (req,res) => {
+
+    const id = req.params.id;
+    try {
+
+        const user = await BanAUserProfile(id);
+
+        if (user) {
+            res.json({
+                success: true,
+                messege: "Wroking",
+                data: user
+            });   
+        }else{
+            res.json({
+                success: true,
+                messege: "Not found",
+                data: null
+            });  
+        }
+
+    } catch (error) {
+       console.log("Something went wrong:"+error);
+        
     }
 }

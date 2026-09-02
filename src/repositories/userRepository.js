@@ -61,3 +61,20 @@ export const BanAUserByID = async (id) => {
         throw error;
     }
 }
+
+export const InActiveUser = async (id) => {
+    try {
+        const user = await User.findByIdAndUpdate(
+            id,
+            {
+                $set: {
+                    status: "Inactive"
+                }
+            },
+            {new: true}
+        );
+        return user;
+    } catch (error) {
+        throw error;
+    }
+}
