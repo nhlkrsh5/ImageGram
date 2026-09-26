@@ -13,7 +13,7 @@ export async function createPost(req,res) {
 
     const post = await createNewPost({
         caption: req.body.caption,
-        image: req.file.location,
+        image: req.file.path,
         id: req.user.id
     });
 

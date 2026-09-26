@@ -1,10 +1,21 @@
 import multer from "multer";
 import multerS3 from "multer-s3"
-import { awss3 } from "./awsConfig.js";
+//import { awss3 } from "./awsConfig.js";
 import { bucket_name } from "./serverConfig.js";
+import {CloudinaryStorage} from "multer-storage-cloudinary";
+import { cloudinary } from "./awsConfig.js";
 console.log(bucket_name);
 
-export const multerUpload = multer({
+const storage = new CloudinaryStorage({
+    cloudinary: cloudinary,
+    params:{
+        folder: "ImageGram",
+        allowed_formats: ["jpg", "jpeg", "png", "webp"],
+    }
+});
+
+export const multerUpload = multer({storage});
+/*export const multerUpload = multer({
     storage: multerS3({
         s3: awss3,
         bucket: bucket_name,
@@ -16,4 +27,4 @@ export const multerUpload = multer({
             cb(null,file.fieldname + "-" + uniquesufix + "-" +"."+ file.mimetype.split("/")[1]);
         }
     })
-});
+});*/
