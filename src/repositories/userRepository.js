@@ -51,7 +51,7 @@ export const BanAUserByID = async (id) => {
             {
                 $set:{
                     caption: "Post Ban for upload sensitive content",
-                    image: "https://firs-project-bucket-644.s3.eu-north-1.amazonaws.com/c_content.jpg"
+                    image: "https://res.cloudinary.com/sczvdxph/image/upload/v1790705390/c_content.jpg"
                 }
             },
             {new: true}
